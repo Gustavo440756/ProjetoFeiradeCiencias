@@ -5,140 +5,378 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VITALIZE - Chatbots na Medicina</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #e0f7fa;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6dd5fa, #2980b9);
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      color: #004d40;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     header {
-      background-color: #00796b;
-      color: white;
-      padding: 1.5rem;
+      color: #fff;
+      padding: 1.8rem 1rem;
       text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      letter-spacing: 2px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      user-select: none;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 0 4px rgba(128, 0, 128, 0.7));
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .logo:hover {
+      transform: rotate(-5deg) scale(1.05);
+      filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.9));
+    }
+    .logo-svg {
+      width: 100%;
+      height: 100%;
+      fill: #7b3fbf;
+      stroke: #4b1d6b;
+      stroke-width: 1.5;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
     }
     main {
       flex: 1;
-      padding: 2rem;
-      max-width: 800px;
+      padding: 2rem 1rem 3rem;
+      max-width: 720px;
       margin: 0 auto;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #f0f0f0;
     }
     h2 {
-      color: #004d40;
+      color: #e0f7fa;
       margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 2rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
     p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       line-height: 1.6;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
     .chatbot-section {
-      background: white;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 1.5rem 1.5rem 2rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
     }
     label {
-      font-weight: bold;
+      font-weight: 600;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+      color: #d0f0f7;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
     textarea {
       width: 100%;
-      height: 100px;
-      padding: 0.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      height: 110px;
+      padding: 0.8rem 1rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      border: none;
       resize: vertical;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.15);
+      font-family: 'Poppins', sans-serif;
+      transition: box-shadow 0.3s ease;
+      background: rgba(255,255,255,0.9);
+      color: #333;
+    }
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 0 12px #7b3fbf;
+      background: #fff;
     }
     button {
-      margin-top: 1rem;
-      background-color: #00796b;
+      margin-top: 1.2rem;
+      background-color: #7b3fbf;
       color: white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
+      padding: 0.85rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 30px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      box-shadow: 0 6px 15px rgba(123, 63, 191, 0.6);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
     }
     button:hover {
-      background-color: #004d40;
+      background-color: #9a63e0;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(154, 99, 224, 0.8);
     }
-    .response {
-      margin-top: 1rem;
-      background-color: #b2dfdb;
-      padding: 1rem;
-      border-radius: 6px;
-      font-style: italic;
+    .response-area {
+      margin-top: 1.5rem;
+      height: 320px;
+      overflow-y: auto;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #e0d9f7;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.15);
+      scrollbar-width: thin;
+      scrollbar-color: #7b3fbf transparent;
+      font-weight: 500;
+    }
+    .response-area::-webkit-scrollbar {
+      width: 8px;
+    }
+    .response-area::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .response-area::-webkit-scrollbar-thumb {
+      background-color: #7b3fbf;
+      border-radius: 10px;
+      border: 2px solid transparent;
+    }
+    .user-msg {
+      text-align: right;
+      background: #7b3fbf;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.7rem;
+      border-radius: 20px 20px 0 20px;
+      display: inline-block;
+      max-width: 80%;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      font-weight: 600;
+      color: #e6d9ff;
+      user-select: text;
+    }
+    .ai-msg {
+      text-align: left;
+      background: #9a63e0;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.7rem;
+      border-radius: 20px 20px 20px 0;
+      display: inline-block;
+      max-width: 80%;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      font-weight: 600;
+      color: #f0e9ff;
+      user-select: text;
     }
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #004d40;
-      color: white;
-      font-size: 0.9rem;
+      background-color: #4b1d6b;
+      color: #d6c6f5;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      user-select: none;
+      box-shadow: 0 -4px 15px rgba(75, 29, 107, 0.8);
+    }
+    /* Placeholder style */
+    ::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      main {
+        padding: 1.5rem 1rem 2rem;
+        border-radius: 16px;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      button {
+        width: 100%;
+        padding: 1rem 0;
+        font-size: 1.1rem;
+      }
+      .user-msg, .ai-msg {
+        max-width: 100%;
+      }
+      .logo {
+        width: 110px;
+        height: 110px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>VITALIZE</header>
+  <header>
+    <div class="logo" aria-label="Logo VITALIZE estilo retro grafite roxo">
+      <svg class="logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+        <!-- Retro typewriter base -->
+        <rect x="15" y="70" width="90" height="25" rx="5" ry="5" fill="#7b3fbf" stroke="#4b1d6b" stroke-width="2"/>
+        <rect x="30" y="40" width="60" height="40" rx="8" ry="8" fill="#9a63e0" stroke="#4b1d6b" stroke-width="2"/>
+        <!-- Keys -->
+        <circle cx="45" cy="80" r="5" fill="#4b1d6b"/>
+        <circle cx="60" cy="80" r="5" fill="#4b1d6b"/>
+        <circle cx="75" cy="80" r="5" fill="#4b1d6b"/>
+        <!-- Paper -->
+        <rect x="40" y="20" width="40" height="25" rx="3" ry="3" fill="#d6c6f5" stroke="#4b1d6b" stroke-width="1.5"/>
+        <!-- Medical cross -->
+        <rect x="58" y="28" width="4" height="14" fill="#7b3fbf"/>
+        <rect x="53" y="33" width="14" height="4" fill="#7b3fbf"/>
+        <!-- Chat bubble -->
+        <path d="M90 55 q10 0 10 10 t-10 10 h-10 l-5 5 v-5 h-5 q-5 0 -5 -5 t5 -5 h15z" fill="#7b3fbf" stroke="#4b1d6b" stroke-width="1.5"/>
+        <circle cx="85" cy="65" r="2" fill="#4b1d6b"/>
+        <circle cx="90" cy="65" r="2" fill="#4b1d6b"/>
+        <circle cx="95" cy="65" r="2" fill="#4b1d6b"/>
+      </svg>
+    </div>
+    VITALIZE
+  </header>
   <main>
-    <h2>A importância dos chatbots na medicina</h2>
+    <h2>Por que chatbots são o futuro da medicina?</h2>
     <p>
-      Os chatbots têm revolucionado a área da saúde, oferecendo suporte 24/7 para pacientes, auxiliando no diagnóstico preliminar, monitoramento de sintomas e até mesmo na gestão de consultas. Eles ajudam a reduzir a carga dos profissionais de saúde, melhoram o acesso à informação e promovem um atendimento mais rápido e eficiente.
+      Os chatbots estão mudando o jogo na saúde! Eles oferecem atendimento 24/7, ajudam a diagnosticar sintomas, lembram você de tomar remédios e até dão aquele suporte emocional quando você mais precisa. Tudo isso sem filas, sem espera e com muita tecnologia por trás.
     </p>
     <p>
-      Com o avanço da inteligência artificial, os chatbots médicos estão cada vez mais precisos e capazes de entender as necessidades dos pacientes, proporcionando uma experiência personalizada e segura.
+      Com inteligência artificial cada vez mais esperta, esses assistentes virtuais entendem você melhor e tornam o cuidado com a saúde mais fácil, rápido e personalizado.
     </p>
 
     <div class="chatbot-section">
-      <label for="userInput">Faça uma pergunta sobre chatbots na medicina:</label>
-      <textarea id="userInput" placeholder="Digite sua pergunta aqui..."></textarea>
-      <button onclick="responder()">Enviar</button>
-      <div id="response" class="response" style="display:none;"></div>
+      <label for="userInput">Manda aí sua pergunta sobre chatbots na medicina:</label>
+      <textarea id="userInput" placeholder="Escreve aqui... 😉"></textarea>
+      <button onclick="sendMessage()">Enviar 🚀</button>
+      <div id="conversation" class="response-area" aria-live="polite" aria-atomic="true"></div>
     </div>
   </main>
   <footer>
-    &copy; 2024 VITALIZE - Tecnologia e Saúde
+    © 2024 VITALIZE - Tecnologia e Saúde com estilo
   </footer>
 
   <script>
-    function responder() {
-      const input = document.getElementById('userInput').value.trim().toLowerCase();
-      const responseDiv = document.getElementById('response');
+    let conversationHistory = [];
+
+    const knowledgeBase = {
+      greeting: [
+        "E aí! Eu sou a VITALIZE AI, pronta pra trocar uma ideia sobre chatbots na medicina. Manda ver!",
+        "Oi! Bora falar sobre como os chatbots estão revolucionando a saúde? Pergunta aí!"
+      ],
+      chatbot: [
+        "Chatbot é tipo um assistente virtual que conversa com você, só que na medicina ele ajuda a entender sintomas, marcar consultas e até dar dicas de saúde. Por exemplo, o Ada Health é um chatbot que analisa seus sintomas e te dá orientações iniciais.",
+        "Na medicina, chatbots usam inteligência artificial pra entender o que você diz e ajudar com informações rápidas e confiáveis, deixando o atendimento mais ágil e acessível."
+      ],
+      vantagens: [
+        "Vantagens? Muitas! Atendimento 24/7, menos espera, ajuda personalizada e até economia de grana. Estudos mostram que chatbots podem reduzir o tempo de espera em até 70%!",
+        "Eles também ajudam os médicos, cuidando do básico pra eles focarem no que importa, e ainda lembram você de tomar remédio e fazer exames."
+      ],
+      exemplos: [
+        "Tem o Sensely, que ajuda na saúde mental, o Florence, que lembra de tomar remédios, e o Microsoft Health Bot, que responde dúvidas médicas rapidinho.",
+        "Outro exemplo massa é o WebMD Health Bot, que te dá informações sobre doenças e tratamentos com base em dados confiáveis."
+      ],
+      segurança: [
+        "Segurança é top! Chatbots médicos seguem regras rígidas pra proteger seus dados, tipo HIPAA e GDPR. Eles não substituem o médico, mas dão aquele suporte seguro e confiável.",
+        "Seus dados são criptografados e protegidos, garantindo privacidade total. É tecnologia de ponta cuidando de você!"
+      ],
+      futuros: [
+        "O futuro é brilhante! Imagine chatbots conectados a relógios inteligentes, monitorando sua saúde em tempo real e te dando dicas personalizadas.",
+        "Com IA generativa, logo eles vão ajudar a criar planos de tratamento sob medida, analisando seu histórico e genética. É saúde high-tech!"
+      ],
+      outros: [
+        "Boa pergunta! A tecnologia dos chatbots está sempre evoluindo, ficando cada vez mais inteligente e humana. Quer saber mais? Manda outra pergunta!"
+      ]
+    };
+
+    function classifyInput(input) {
+      const lowerInput = input.toLowerCase();
+      if (/(oi|olá|e aí|bom dia|boa tarde|boa noite|fala)/.test(lowerInput)) {
+        return 'greeting';
+      } else if (/(chatbot|o que é|como funciona|assistente virtual)/.test(lowerInput)) {
+        return 'chatbot';
+      } else if (/(vantagem|benefício|por que usar|qual a vantagem)/.test(lowerInput)) {
+        return 'vantagens';
+      } else if (/(exemplo|exemplos|quais são|quais)/.test(lowerInput)) {
+        return 'exemplos';
+      } else if (/(segurança|privacidade|proteção|dados)/.test(lowerInput)) {
+        return 'segurança';
+      } else if (/(futuro|avançar|próximo passo|inovação|tecnologia)/.test(lowerInput)) {
+        return 'futuros';
+      } else {
+        return 'outros';
+      }
+    }
+
+    function generateResponse(userInput) {
+      const category = classifyInput(userInput);
+      const responses = knowledgeBase[category];
+      const prevCategory = conversationHistory.length > 0 ? conversationHistory[conversationHistory.length - 1].category : null;
+      if (prevCategory === category) {
+        return "Você curte esse assunto! Vamos aprofundar: " + responses[Math.floor(Math.random() * responses.length)];
+      }
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    function sendMessage() {
+      const inputElem = document.getElementById('userInput');
+      const input = inputElem.value.trim();
       if (!input) {
-        responseDiv.style.display = 'block';
-        responseDiv.textContent = 'Por favor, digite uma pergunta para que eu possa ajudar.';
+        alert('Ops! Digite algo para a gente conversar 😉');
         return;
       }
+      const conversationDiv = document.getElementById('conversation');
 
-      // Respostas simples baseadas em palavras-chave
-      let resposta = '';
+      // Mensagem do usuário
+      const userMsg = document.createElement('div');
+      userMsg.className = 'user-msg';
+      userMsg.textContent = 'Você: ' + input;
+      conversationDiv.appendChild(userMsg);
 
-      if (input.includes('o que é chatbot') || input.includes('chatbot')) {
-        resposta = 'Chatbots são programas de computador que simulam uma conversa humana para fornecer informações e suporte, muito usados na medicina para ajudar pacientes e profissionais.';
-      } else if (input.includes('vantagens')) {
-        resposta = 'As vantagens dos chatbots na medicina incluem atendimento 24 horas, redução do tempo de espera, suporte personalizado e auxílio no monitoramento de pacientes.';
-      } else if (input.includes('exemplos')) {
-        resposta = 'Exemplos de chatbots médicos incluem assistentes virtuais para triagem de sintomas, lembretes de medicação e suporte psicológico online.';
-      } else if (input.includes('segurança') || input.includes('privacidade')) {
-        resposta = 'A segurança e privacidade dos dados são essenciais. Chatbots médicos devem seguir normas rigorosas para proteger as informações dos pacientes.';
-      } else {
-        resposta = 'Essa é uma ótima pergunta! Os chatbots na medicina são uma área em constante evolução, e eles ajudam a melhorar o acesso e a qualidade do atendimento.';
-      }
+      inputElem.value = '';
 
-      responseDiv.style.display = 'block';
-      responseDiv.textContent = resposta;
+      // Resposta da IA
+      const category = classifyInput(input);
+      const response = generateResponse(input);
+      conversationHistory.push({ user: input, ai: response, category });
+
+      setTimeout(() => {
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'ai-msg';
+        aiMsg.textContent = 'VITALIZE AI: ' + response;
+        conversationDiv.appendChild(aiMsg);
+        conversationDiv.scrollTop = conversationDiv.scrollHeight;
+      }, 600);
     }
+
+    window.onload = function() {
+      setTimeout(() => {
+        const conversationDiv = document.getElementById('conversation');
+        const greetingMsg = document.createElement('div');
+        greetingMsg.className = 'ai-msg';
+        greetingMsg.textContent = 'VITALIZE AI: ' + knowledgeBase.greeting[0];
+        conversationDiv.appendChild(greetingMsg);
+      }, 1000);
+    };
   </script>
 </body>
 </html>
