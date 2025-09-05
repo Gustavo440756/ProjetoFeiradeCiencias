@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VITALIZE - Chatbots na Medicina</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e0f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #004d40;
+    }
+    header {
+      background-color: #00796b;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #004d40;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .chatbot-section {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1rem;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    .response {
+      margin-top: 1rem;
+      background-color: #b2dfdb;
+      padding: 1rem;
+      border-radius: 6px;
+      font-style: italic;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #004d40;
+      color: white;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>VITALIZE</header>
+  <main>
+    <h2>A importância dos chatbots na medicina</h2>
+    <p>
+      Os chatbots têm revolucionado a área da saúde, oferecendo suporte 24/7 para pacientes, auxiliando no diagnóstico preliminar, monitoramento de sintomas e até mesmo na gestão de consultas. Eles ajudam a reduzir a carga dos profissionais de saúde, melhoram o acesso à informação e promovem um atendimento mais rápido e eficiente.
+    </p>
+    <p>
+      Com o avanço da inteligência artificial, os chatbots médicos estão cada vez mais precisos e capazes de entender as necessidades dos pacientes, proporcionando uma experiência personalizada e segura.
+    </p>
+
+    <div class="chatbot-section">
+      <label for="userInput">Faça uma pergunta sobre chatbots na medicina:</label>
+      <textarea id="userInput" placeholder="Digite sua pergunta aqui..."></textarea>
+      <button onclick="responder()">Enviar</button>
+      <div id="response" class="response" style="display:none;"></div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2024 VITALIZE - Tecnologia e Saúde
+  </footer>
+
+  <script>
+    function responder() {
+      const input = document.getElementById('userInput').value.trim().toLowerCase();
+      const responseDiv = document.getElementById('response');
+      if (!input) {
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = 'Por favor, digite uma pergunta para que eu possa ajudar.';
+        return;
+      }
+
+      // Respostas simples baseadas em palavras-chave
+      let resposta = '';
+
+      if (input.includes('o que é chatbot') || input.includes('chatbot')) {
+        resposta = 'Chatbots são programas de computador que simulam uma conversa humana para fornecer informações e suporte, muito usados na medicina para ajudar pacientes e profissionais.';
+      } else if (input.includes('vantagens')) {
+        resposta = 'As vantagens dos chatbots na medicina incluem atendimento 24 horas, redução do tempo de espera, suporte personalizado e auxílio no monitoramento de pacientes.';
+      } else if (input.includes('exemplos')) {
+        resposta = 'Exemplos de chatbots médicos incluem assistentes virtuais para triagem de sintomas, lembretes de medicação e suporte psicológico online.';
+      } else if (input.includes('segurança') || input.includes('privacidade')) {
+        resposta = 'A segurança e privacidade dos dados são essenciais. Chatbots médicos devem seguir normas rigorosas para proteger as informações dos pacientes.';
+      } else {
+        resposta = 'Essa é uma ótima pergunta! Os chatbots na medicina são uma área em constante evolução, e eles ajudam a melhorar o acesso e a qualidade do atendimento.';
+      }
+
+      responseDiv.style.display = 'block';
+      responseDiv.textContent = resposta;
+    }
+  </script>
+</body>
+</html>
